@@ -1,0 +1,21 @@
+<textarea name="" id="textarea" cols="30" rows="10"></textarea>
+<button id="button">button</button>
+<script>
+  // Chromeで動かす用の記述
+  var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+  // SpeechRecognitionの初期化
+  const recognition = new SpeechRecognition();
+  // 喋っている途中も文字を表示させる設定
+  recognition.interimResults = true;
+
+  // ボタン押したら音声認識を開始する
+  document.getElementById("button").onclick = function () {
+    recognition.start();
+  };
+
+  // 認識した言葉をテキストエリアに反映する
+  recognition.onresult = function (event) {
+    document.getElementById("textarea").textContent =
+      event.results[0][0].transcript;
+  };
+</script>
